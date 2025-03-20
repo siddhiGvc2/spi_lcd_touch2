@@ -72,6 +72,7 @@ static SemaphoreHandle_t lvgl_mux = NULL;
 esp_lcd_touch_handle_t tp = NULL;
 #endif
 
+extern void displayLights(void);
 static lv_obj_t *meter;
 static lv_obj_t * btn;
 static lv_disp_rot_t rotation = LV_DISP_ROT_NONE;
@@ -418,7 +419,8 @@ void app_main(void)
     ESP_LOGI(TAG, "Display LVGL Meter Widget");
     // Lock the mutex due to the LVGL APIs are not thread-safe
     if (example_lvgl_lock(-1)) {
-        example_lvgl_demo_ui(disp);
+        displayLights();
+        // example_lvgl_demo_ui(disp);
         // Release the mutex
         example_lvgl_unlock();
     }
